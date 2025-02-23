@@ -1,12 +1,13 @@
-# tts
+# TTS piper in a docker container
+This is a docker container for piper tts on a raspberry pi. It can be used very easily. Have fun :)
 
 ## Requirements
-Raspberry Pi 5 with 8 GB RAM
-Charger for Raspberry Pi
-64 GB SD Card
-Bluetooth Speaker
-Mouse 
-Keyboard
+- Raspberry Pi 5 with 8 GB RAM
+- Charger for Raspberry Pi
+- 64 GB SD Card
+- Bluetooth Speaker
+- Mouse 
+- Keyboard
 
 ## Setup on Raspberry Pi
 Install the newest image for Raspberry Pi 5.
@@ -14,7 +15,7 @@ Install the newest image for Raspberry Pi 5.
 ## Install and Run
 Get repository and build the docker image:
 ```
-git clone
+git clone https://github.com/Hannah-Fehringer/tts-piper-docker.git
 cd tts
 ./deployment/build.sh
 ```
@@ -35,7 +36,7 @@ curl -u guest:guest -H "Content-Type: application/json" \
 
 If you want to change the voices, check the following section.
 
-### Download models
+### Change voices
 Get the link for the voice you want to use:
 https://github.com/rhasspy/piper/blob/master/VOICES.md
 
