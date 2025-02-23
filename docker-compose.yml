@@ -1,0 +1,30 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+  
+  tts:
+    image: tts:latest
+    container_name: tts
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /run/user/1000/pulse:/run/user/1000/pulse
+      - /run/dbus:/run/dbus
+      - ${PWD}:/tts
+    devices:
+      - /dev/snd:/dev/snd
+      - /dev/bus/usb:/dev/bus/usb
+    environment:
+      - PULSE_SERVER=unix:/run/user/1000/pulse/native
+      - PULSE_COOKIE=/run/user/1000/pulse/cookie
+    depends_on:
+      - rabbitmq
+    network_mode: host
+    entrypoint: ["/tts/wait-for-rabbitmq.sh"]
+    command: ["python3", "tts.py"]
+    privileged: true
+    restart: unless-stopped
